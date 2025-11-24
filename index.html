@@ -221,7 +221,7 @@
     <script>
         // --- CẤU HÌNH MẬT KHẨU ---
         // Sửa số 123456 bên dưới thành mật khẩu bạn muốn
-        const MAT_KHAU_DUNG = "787878"; 
+        const MAT_KHAU_DUNG = "789789"; 
 
         // Kiểm tra xem đã đăng nhập chưa
         if(localStorage.getItem("vipUser") === "true"){
@@ -259,4 +259,12 @@
                 h3 = cards[i].getElementsByTagName("h3")[0];
                 txtValue = h3.textContent || h3.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    cards[i].style.display = "flex
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
