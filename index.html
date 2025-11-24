@@ -3,144 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KHO TẢI APK VIP BÌNH PRO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>KHO TẢI APK BÌNH PRO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* --- CẤU HÌNH CHUNG --- */
+        /* --- 1. CẤU HÌNH MÀU SẮC (LIGHT THEME) --- */
         :root {
-            --primary: #ffd700; /* Màu Vàng Gold VIP */
-            --accent: #00d2ff;  /* Màu Xanh Công nghệ */
-            --bg-dark: #0a0a0a;
-            --card-bg: rgba(30, 30, 30, 0.8);
+            --bg-body: #f3f4f6;       /* Xám rất nhạt */
+            --bg-card: #ffffff;       /* Trắng tinh */
+            --primary: #2563eb;       /* Xanh Royal Blue chuyên nghiệp */
+            --primary-dark: #1e40af;  /* Xanh đậm hơn khi hover */
+            --text-main: #1f2937;     /* Xám đen (Dễ đọc hơn đen tuyền) */
+            --text-sub: #6b7280;      /* Xám nhạt cho mô tả */
+            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08); /* Bóng mờ xịn */
+            --shadow-hover: 0 20px 50px -10px rgba(37, 99, 235, 0.2);
         }
 
         body {
-            font-family: 'Exo 2', sans-serif;
-            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
-            color: white;
-            margin: 0;
-            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0; padding: 0;
             min-height: 100vh;
-            user-select: none; 
+            user-select: none;
         }
 
-        /* --- HEADER & TÌM KIẾM --- */
+        /* --- 2. HEADER & SEARCH --- */
         .header {
+            background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+            padding: 40px 20px 30px;
             text-align: center;
-            padding: 30px 15px;
-            background: rgba(0,0,0,0.6);
-            border-bottom: 2px solid var(--primary);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
 
         .header h1 {
             margin: 0;
-            font-size: clamp(20px, 5vw, 40px);
-            text-transform: uppercase;
-            background: linear-gradient(to right, var(--primary), #fff, var(--primary));
+            font-size: clamp(22px, 5vw, 36px);
+            font-weight: 800;
+            background: linear-gradient(to right, #2563eb, #9333ea); /* Chữ màu Gradient Xanh Tím */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 900;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-            letter-spacing: 1px;
+            letter-spacing: -0.5px;
         }
 
         .sub-title {
-            color: #aaa; font-size: 0.9em; margin-top: 5px;
+            margin-top: 8px; color: var(--text-sub); font-size: 15px;
         }
 
         .search-container {
-            margin-top: 15px; display: flex; justify-content: center;
+            margin-top: 25px; display: flex; justify-content: center;
         }
 
         .search-box {
-            width: 100%; max-width: 600px; padding: 12px 20px;
-            border-radius: 50px; border: 2px solid rgba(255,255,255,0.2);
-            background: rgba(0,0,0,0.5); color: white; font-size: 18px;
-            outline: none; transition: all 0.3s;
+            width: 100%; max-width: 500px; padding: 16px 25px;
+            border-radius: 100px; border: 2px solid transparent;
+            background: white;
+            color: var(--text-main); font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Bóng nhẹ */
+            transition: all 0.3s ease;
+            outline: none;
         }
-
+        
         .search-box:focus {
-            border-color: var(--primary); box-shadow: 0 0 15px var(--primary);
-            background: black;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); /* Hiệu ứng tỏa sáng khi bấm vào */
         }
 
-        /* --- LƯỚI ỨNG DỤNG --- */
+        /* --- 3. LƯỚI ỨNG DỤNG --- */
         .container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px; padding: 20px; max-width: 1400px; margin: 0 auto;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px; padding: 40px 20px;
+            max-width: 1200px; margin: 0 auto;
         }
 
-        /* --- THẺ CARD --- */
+        /* --- 4. THẺ CARD CHUYÊN NGHIỆP --- */
         .app-card {
-            background: var(--card-bg); border-radius: 16px; padding: 20px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 25px;
             display: flex; flex-direction: column; align-items: center;
-            text-align: center; border: 1px solid rgba(255,255,255,0.1);
-            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-            cursor: pointer; position: relative; text-decoration: none; color: white;
+            text-align: center;
+            text-decoration: none;
+            position: relative; /* Để gắn nhãn HOT */
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .app-card img {
-            width: 90px; height: 90px; object-fit: contain;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); margin-bottom: 15px;
+            width: 80px; height: 80px; object-fit: contain;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            transition: transform 0.3s;
         }
 
-        .app-card h3 { margin: 5px 0; font-size: 1.3em; color: var(--primary); }
-        .app-card p { font-size: 0.9em; color: #ccc; margin-bottom: 15px; line-height: 1.4; }
+        .app-card h3 {
+            margin: 5px 0; font-size: 18px; font-weight: 700; color: var(--text-main);
+        }
 
+        .app-card p {
+            font-size: 14px; color: var(--text-sub); margin-bottom: 20px; line-height: 1.5;
+        }
+
+        /* Nút Tải về (Style bo tròn hiện đại) */
         .download-btn {
-            background: linear-gradient(90deg, #0052D4, #4364F7, #6FB1FC);
-            color: white; padding: 10px 0; width: 100%; border-radius: 8px;
-            font-weight: bold; text-transform: uppercase; font-size: 14px;
+            background-color: #f3f4f6; color: var(--primary);
+            padding: 10px 24px; border-radius: 50px;
+            font-weight: 600; font-size: 13px;
+            transition: all 0.2s;
         }
 
+        /* --- NHÃN DÁN (BADGE) - TÍNH NĂNG MỚI --- */
+        .badge {
+            position: absolute; top: 15px; right: 15px;
+            background: #ef4444; /* Màu đỏ */
+            color: white; font-size: 10px; font-weight: 800;
+            padding: 4px 8px; border-radius: 6px;
+            text-transform: uppercase;
+        }
+        .badge.blue { background: #3b82f6; } /* Nhãn xanh */
+        .badge.green { background: #10b981; } /* Nhãn xanh lá */
+
+        /* --- HIỆU ỨNG HOVER & FOCUS (QUAN TRỌNG CHO TV) --- */
         .app-card:hover, .app-card:focus {
-            transform: scale(1.05); background: rgba(50, 50, 50, 0.95);
-            border-color: var(--primary); box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-            outline: none; z-index: 10;
-        }
-        
-        .app-card:focus .download-btn, .app-card:hover .download-btn {
-            background: var(--primary); color: black; box-shadow: 0 0 10px var(--primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+            outline: none;
         }
 
+        /* Khi chọn, nút bấm đổi màu */
+        .app-card:hover .download-btn, .app-card:focus .download-btn {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        .app-card:hover img, .app-card:focus img {
+            transform: scale(1.1);
+        }
+
+        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 600px) {
-            .container { grid-template-columns: 1fr; gap: 15px; padding: 10px; }
-            .app-card { flex-direction: row; padding: 15px; text-align: left; align-items: center; }
-            .app-card img { width: 60px; height: 60px; margin-bottom: 0; margin-right: 15px; }
+            .container { grid-template-columns: 1fr; gap: 15px; padding: 15px; }
+            .app-card {
+                flex-direction: row; text-align: left; padding: 15px;
+                align-items: center; border-radius: 16px;
+            }
+            .app-card img { width: 60px; height: 60px; margin: 0 15px 0 0; }
             .app-card div { flex: 1; }
-            .app-card h3 { font-size: 1.1em; margin-top: 0; }
-            .download-btn { width: auto; padding: 8px 15px; margin-top: 5px; display: inline-block; }
+            .badge { top: 10px; right: 10px; font-size: 9px; }
+            .download-btn { display: inline-block; margin-top: 5px; padding: 6px 15px; font-size: 12px;}
         }
 
-        /* --- CSS CHO MÀN HÌNH KHÓA --- */
+        /* --- CSS MÀN HÌNH KHÓA (LIGHT MODE) --- */
         #loginOverlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 9999;
+            background: rgba(255,255,255,0.8); /* Nền trắng mờ */
+            backdrop-filter: blur(15px); z-index: 9999;
             display: flex; justify-content: center; align-items: center;
-            backdrop-filter: blur(10px);
         }
         .login-box {
-            background: #1a1a1a; padding: 40px; border-radius: 20px;
-            text-align: center; border: 2px solid var(--primary);
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
-            width: 300px;
+            background: white; padding: 40px; border-radius: 24px;
+            text-align: center; width: 320px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border: 1px solid #f3f4f6;
         }
         .login-input {
-            width: 100%; padding: 12px; margin: 15px 0;
-            background: #333; border: 1px solid #555; color: white;
-            border-radius: 5px; font-size: 16px; outline: none;
-            box-sizing: border-box; text-align: center;
+            width: 100%; padding: 14px; margin: 20px 0;
+            background: #f9fafb; border: 2px solid #e5e7eb;
+            border-radius: 12px; font-size: 16px; outline: none;
+            box-sizing: border-box; text-align: center; color: #333;
+            transition: 0.3s;
         }
+        .login-input:focus { border-color: var(--primary); background: white; }
         .login-btn {
-            width: 100%; padding: 12px; background: var(--primary);
-            color: black; font-weight: 900; border: none;
-            border-radius: 5px; cursor: pointer; font-size: 16px;
+            width: 100%; padding: 14px; background: var(--primary);
+            color: white; font-weight: 700; border: none;
+            border-radius: 12px; cursor: pointer; font-size: 16px;
+            transition: 0.3s;
         }
+        .login-btn:hover { background: var(--primary-dark); transform: scale(1.02); }
         .shake { animation: shake 0.3s; }
         @keyframes shake {
             0% { transform: translateX(0); } 25% { transform: translateX(-10px); }
@@ -153,16 +198,18 @@
 
     <div id="loginOverlay">
         <div class="login-box" id="loginBox">
-            <h2 style="color: var(--primary); margin-top: 0;">🔒 KHO VIP</h2>
-            <p style="color: #bbb;">Nhập mật khẩu để truy cập</p>
-            <input type="password" id="passInput" class="login-input" placeholder="Mật khẩu...">
-            <button onclick="checkPass()" class="login-btn">MỞ KHÓA</button>
-            <p id="errorMsg" style="color: #ff4444; display: none; margin-top: 10px;">❌ Sai mật khẩu!</p>
+            <div style="font-size: 40px; margin-bottom: 10px;">🔐</div>
+            <h2 style="color: var(--text-main); margin: 0;">Khu Vực VIP</h2>
+            <p style="color: var(--text-sub); font-size: 14px; margin-top: 5px;">Nhập mật khẩu để truy cập kho tải</p>
+            
+            <input type="password" id="passInput" class="login-input" placeholder="Nhập mật khẩu...">
+            <button onclick="checkPass()" class="login-btn">MỞ KHÓA NGAY</button>
+            <p id="errorMsg" style="color: #ef4444; display: none; margin-top: 15px; font-weight: 600;">❌ Sai mật khẩu rồi!</p>
         </div>
     </div>
 
     <div class="header">
-        <h1>KHO TẢI APK VIP BÌNH PRO</h1>
+        <h1>KHO TẢI BÌNH PRO</h1>
         <div class="sub-title">Cập nhật phần mềm Android Box & Tivi mới nhất</div>
         <div class="search-container">
             <input type="text" id="searchInput" class="search-box" onkeyup="filterApps()" placeholder="🔍 Tìm kiếm ứng dụng...">
@@ -172,38 +219,41 @@
     <div class="container" id="appGrid">
 
         <a href="Phim4K-v2.1.6.apk" class="app-card" tabindex="0">
+            <span class="badge">HOT 🔥</span>
             <img src="https://cdn-icons-png.flaticon.com/512/3163/3163508.png" alt="Icon">
             <div>
                 <h3>Phim4K VIP</h3>
-                <p>v2.1.6 - Xem phim 4K mượt</p>
-                <span class="download-btn">TẢI XUỐNG</span>
+                <p>v2.1.6 - Xem phim 4K siêu mượt</p>
+                <span class="download-btn">Tải Xuống</span>
             </div>
         </a>
 
         <a href="kodi21.2-32bit.apk" class="app-card" tabindex="0">
+            <span class="badge blue">MỚI</span>
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Kodi_logo.svg/1200px-Kodi_logo.svg.png" alt="Icon">
             <div>
-                <h3>Kodi 32bit</h3>
-                <p>Bản ổn định cho Box cũ</p>
-                <span class="download-btn">TẢI XUỐNG</span>
+                <h3>Kodi 21.2 (32bit)</h3>
+                <p>Bản ổn định cho Android Box cũ</p>
+                <span class="download-btn">Tải Xuống</span>
             </div>
         </a>
 
         <a href="kodi21.2-64bit.apk" class="app-card" tabindex="0">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Kodi_logo.svg/1200px-Kodi_logo.svg.png" alt="Icon">
             <div>
-                <h3>Kodi 64bit</h3>
-                <p>Bản mới cho Tivi đời cao</p>
-                <span class="download-btn">TẢI XUỐNG</span>
+                <h3>Kodi 21.2 (64bit)</h3>
+                <p>Dành cho Tivi Sony, TCL đời mới</p>
+                <span class="download-btn">Tải Xuống</span>
             </div>
         </a>
 
         <a href="file zip repo.zip" class="app-card" tabindex="0">
+            <span class="badge green">FULL</span>
             <img src="https://cdn-icons-png.flaticon.com/512/9063/9063038.png" alt="Icon">
             <div>
                 <h3>Repo Tổng Hợp</h3>
-                <p>File Zip đầy đủ Addon</p>
-                <span class="download-btn">TẢI XUỐNG</span>
+                <p>File Zip đầy đủ Addon đã cài sẵn</p>
+                <span class="download-btn">Tải Xuống</span>
             </div>
         </a>
 
@@ -211,8 +261,8 @@
             <img src="https://cdn-icons-png.flaticon.com/512/2620/2620735.png" alt="Icon">
             <div>
                 <h3>Tool Cài Nhanh</h3>
-                <p>Script tự động cài đặt</p>
-                <span class="download-btn">TẢI XUỐNG</span>
+                <p>Script tự động cài đặt trên PC</p>
+                <span class="download-btn">Tải Xuống</span>
             </div>
         </a>
 
@@ -220,10 +270,8 @@
 
     <script>
         // --- CẤU HÌNH MẬT KHẨU ---
-        // Sửa số 123456 bên dưới thành mật khẩu bạn muốn
-        const MAT_KHAU_DUNG = "789789"; 
+        const MAT_KHAU_DUNG = "123456"; 
 
-        // Kiểm tra xem đã đăng nhập chưa
         if(localStorage.getItem("vipUser") === "true"){
             document.getElementById("loginOverlay").style.display = "none";
         }
@@ -234,7 +282,7 @@
             
             if(input === MAT_KHAU_DUNG) {
                 document.getElementById("loginOverlay").style.display = "none";
-                localStorage.setItem("vipUser", "true"); // Lưu lại đăng nhập
+                localStorage.setItem("vipUser", "true"); 
             } else {
                 document.getElementById("errorMsg").style.display = "block";
                 box.classList.add("shake");
@@ -242,12 +290,10 @@
             }
         }
         
-        // Bấm Enter cũng đăng nhập được
         document.getElementById("passInput").addEventListener("keypress", function(e){
             if(e.key === "Enter") checkPass();
         });
 
-        // Hàm lọc tìm kiếm
         function filterApps() {
             var input, filter, grid, cards, h3, i, txtValue;
             input = document.getElementById('searchInput');
