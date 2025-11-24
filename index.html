@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KHO TẢI APK VIP BÌNH PRO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- CẤU HÌNH CHUNG --- */
+        :root {
+            --primary: #ffd700; /* Màu Vàng Gold VIP */
+            --accent: #00d2ff;  /* Màu Xanh Công nghệ */
+            --bg-dark: #0a0a0a;
+            --card-bg: rgba(30, 30, 30, 0.8);
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* Chống chọn văn bản khi bấm nhầm trên TV */
+            user-select: none; 
+        }
+
+        /* --- HEADER & TÌM KIẾM --- */
+        .header {
+            text-align: center;
+            padding: 30px 15px;
+            background: rgba(0,0,0,0.6);
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(15px);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: clamp(20px, 5vw, 40px); /* Tự chỉnh cỡ chữ theo màn hình */
+            text-transform: uppercase;
+            background: linear-gradient(to right, var(--primary), #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            letter-spacing: 1px;
+        }
+
+        .sub-title {
+            color: #aaa;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .search-container {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 18px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        /* Khi bấm vào ô tìm kiếm */
+        .search-box:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+            background: black;
+        }
+
+        /* --- LƯỚI ỨNG DỤNG --- */
+        .container {
+            display: grid;
+            /* Tự động chia cột: Điện thoại 1 cột, Tablet 2 cột, PC/TV 3-4 cột */
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* --- THẺ CARD (QUAN TRỌNG CHO TV) --- */
+        .app-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            cursor: pointer;
+            position: relative;
+            text-decoration: none; /* Bỏ gạch chân link */
+            color: white;
+        }
+
+        .app-card img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+            margin-bottom: 15px;
+        }
+
+        .app-card h3 {
+            margin: 5px 0;
+            font-size: 1.3em;
+            color: var(--primary);
+        }
+
+        .app-card p {
+            font-size: 0.9em;
+            color: #ccc;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .download-btn {
+            background: linear-gradient(90deg, #0052D4, #4364F7, #6FB1FC);
+            color: white;
+            padding: 10px 0;
+            width: 100%;
+            border-radius: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        /* --- HIỆU ỨNG FOCUS (DÀNH CHO REMOTE TV) --- */
+        /* Khi dùng remote di chuyển vào thẻ này */
+        .app-card:hover, .app-card:focus {
+            transform: scale(1.05);
+            background: rgba(50, 50, 50, 0.95);
+            border-color: var(--primary);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+            outline: none; /* Bỏ viền xanh mặc định của trình duyệt */
+            z-index: 10;
+        }
+        
+        /* Khi Focus vào, nút tải đổi màu để người dùng dễ thấy */
+        .app-card:focus .download-btn, .app-card:hover .download-btn {
+            background: var(--primary);
+            color: black;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        /* --- PHIÊN BẢN CHO ĐIỆN THOẠI NHỎ --- */
+        @media (max-width: 600px) {
+            .container {
+                grid-template-columns: 1fr; /* 1 cột duy nhất */
+                gap: 15px;
+                padding: 10px;
+            }
+            .app-card {
+                flex-direction: row; /* Xếp ngang icon và chữ */
+                padding: 15px;
+                text-align: left;
+                align-items: center;
+            }
+            .app-card img {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 0;
+                margin-right: 15px;
+            }
+            .app-card div {
+                flex: 1;
+            }
+            .app-card h3 {
+                font-size: 1.1em;
+                margin-top: 0;
+            }
+            .download-btn {
+                width: auto;
+                padding: 8px 15px;
+                margin-top: 5px;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>KHO TẢI APK VIP BÌNH PRO</h1>
+        <div class="sub-title">Cập nhật phần mềm Android Box & Tivi mới nhất</div>
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-box" onkeyup="filterApps()" placeholder="🔍 Tìm kiếm ứng dụng (Nhập tên)...">
+        </div>
+    </div>
+
+    <div class="container" id="appGrid">
+
+        <a href="Phim4K-v2.1.6.apk" class="app-card" tabindex="0">
+            <img src="https://cdn-icons-png.flaticon.com/512/3163/3163508.png" alt="Icon">
+            <div>
+                <h3>Phim4K VIP</h3>
+                <p>v2.1.6 - Xem phim 4K mượt</p>
+                <span class="download-btn">TẢI XUỐNG</span>
+            </div>
+        </a>
+
+        <a href="kodi21.2-32bit.apk" class="app-card" tabindex="0">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Kodi_logo.svg/1200px-Kodi_logo.svg.png" alt="Icon">
+            <div>
+                <h3>Kodi 32bit</h3>
+                <p>Bản ổn định cho Box cũ</p>
+                <span class="download-btn">TẢI XUỐNG</span>
+            </div>
+        </a>
+
+        <a href="kodi21.2-64bit.apk" class="app-card" tabindex="0">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Kodi_logo.svg/1200px-Kodi_logo.svg.png" alt="Icon">
+            <div>
+                <h3>Kodi 64bit</h3>
+                <p>Bản mới cho Tivi đời cao</p>
+                <span class="download-btn">TẢI XUỐNG</span>
+            </div>
+        </a>
+
+        <a href="file zip repo.zip" class="app-card" tabindex="0">
+            <img src="https://cdn-icons-png.flaticon.com/512/9063/9063038.png" alt="Icon">
+            <div>
+                <h3>Repo Tổng Hợp</h3>
+                <p>File Zip đầy đủ Addon</p>
+                <span class="download-btn">TẢI XUỐNG</span>
+            </div>
+        </a>
+
+        <a href="cat dat py.bat" class="app-card" tabindex="0">
+            <img src="https://cdn-icons-png.flaticon.com/512/2620/2620735.png" alt="Icon">
+            <div>
+                <h3>Tool Cài Nhanh</h3>
+                <p>Script tự động cài đặt</p>
+                <span class="download-btn">TẢI XUỐNG</span>
+            </div>
+        </a>
+
+        </div>
+
+    <script>
+        function filterApps() {
+            var input, filter, grid, cards, h3, i, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            grid = document.getElementById("appGrid");
+            cards = grid.getElementsByClassName('app-card');
+
+            for (i = 0; i < cards.length; i++) {
+                h3 = cards[i].getElementsByTagName("h3")[0];
+                txtValue = h3.textContent || h3.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "flex"; // Giữ layout flex
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
