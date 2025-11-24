@@ -1,414 +1,73 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KHO TẢI BÌNH PRO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        /* --- 1. CẤU HÌNH MÀU SẮC (LIGHT THEME) --- */
-        :root {
-            --bg-body: #f3f4f6;        
-            --bg-card: #ffffff;        
-            --primary: #2563eb;       
-            --text-main: #1f2937;     
-            --text-sub: #6b7280;      
-            --border-color: #e5e7eb;
-            --header-bg: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08); 
-            --shadow-hover: 0 20px 50px -10px rgba(37, 99, 235, 0.2);
-        }
-
-        /* --- DARK MODE VARIABLES --- */
-        .dark-mode {
-            --bg-body: #111827;        
-            --bg-card: #1f2937;        
-            --text-main: #f9fafb;      
-            --text-sub: #9ca3af;       
-            --border-color: #374151;
-            --header-bg: #1f2937;      
-            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.3);
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            margin: 0; padding: 0;
-            min-height: 100vh;
-            user-select: none;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        /* --- 2. HEADER --- */
-        .header {
-            background: var(--header-bg);
-            padding: 15px 20px; 
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky; top: 0; z-index: 100;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            transition: background 0.3s;
-        }
-
-        .header-top { position: relative; }
-
-        .theme-toggle {
-            position: absolute; top: 0; right: 0;
-            background: rgba(0,0,0,0.05); border: none;
-            padding: 8px 12px; border-radius: 20px;
-            cursor: pointer; font-size: 16px;
-            transition: all 0.2s;
-        }
-        .dark-mode .theme-toggle { background: rgba(255,255,255,0.1); color: yellow; }
-        .theme-toggle:hover { transform: scale(1.1); }
-
-        .header h1 {
-            margin: 0;
-            font-size: 26px; 
-            font-weight: 800;
-            background: linear-gradient(to right, #2563eb, #9333ea); 
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-        }
-
-        .sub-title {
-            margin-top: 2px; color: var(--text-sub); font-size: 13px;
-        }
-
-        .stats-bar {
-            display: flex; justify-content: center; gap: 15px;
-            margin-top: 8px; font-size: 12px;
-            color: var(--text-sub); font-weight: 600;
-        }
-        .stat-item {
-            display: flex; align-items: center; gap: 5px;
-            background: rgba(37, 99, 235, 0.1);
-            padding: 4px 10px; border-radius: 20px;
-        }
-        .dark-mode .stat-item { background: rgba(37, 99, 235, 0.2); }
-        .stat-dot {
-            height: 8px; width: 8px; background-color: #22c55e;
-            border-radius: 50%; display: inline-block;
-            box-shadow: 0 0 8px #22c55e; animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        .stat-number { color: var(--primary); font-weight: 800; }
-
-        .search-container {
-            margin-top: 10px; display: flex; flex-direction: column; align-items: center; gap: 10px;
-        }
-
-        .search-box {
-            width: 100%; max-width: 500px; 
-            padding: 8px 20px; border-radius: 100px; 
-            border: 1px solid var(--border-color);
-            background: var(--bg-card);
-            color: var(--text-main); font-size: 14px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
-            transition: all 0.3s ease; outline: none;
-        }
-        .search-box:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); 
-        }
-
-        /* --- BỘ LỌC NHANH (QUICK FILTERS) --- */
-        .filter-buttons {
-            display: flex; gap: 8px; overflow-x: auto;
-            padding-bottom: 5px;
-            scrollbar-width: none; 
-        }
-        .filter-btn {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            color: var(--text-sub);
-            padding: 6px 16px; border-radius: 20px;
-            font-size: 12px; font-weight: 600; cursor: pointer;
-            white-space: nowrap; transition: all 0.2s;
-        }
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary); color: white; border-color: var(--primary);
-        }
-
-        /* --- 3. LƯỚI ỨNG DỤNG --- */
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px; padding: 20px; 
-            max-width: 1400px; margin: 0 auto;
-        }
-
-        .app-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 20px;
-            display: flex; flex-direction: column; align-items: center;
-            text-align: center; text-decoration: none;
-            position: relative; 
-            box-shadow: var(--shadow-soft);
-            border: 1px solid rgba(0,0,0,0.03);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .dark-mode .app-card { border: 1px solid var(--border-color); }
-
-        .app-card img {
-            width: 70px; height: 70px; object-fit: contain;
-            margin-bottom: 12px; border-radius: 12px; 
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-            transition: transform 0.3s;
-        }
-
-        .app-card h3 {
-            margin: 5px 0; font-size: 17px; font-weight: 700; color: var(--text-main);
-        }
-
-        .app-card p {
-            font-size: 13px; color: var(--text-sub); margin-bottom: 15px; line-height: 1.4;
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; 
-        }
-
-        .download-btn {
-            background-color: #f3f4f6; color: var(--primary);
-            padding: 8px 20px; border-radius: 50px;
-            font-weight: 600; font-size: 12px; transition: all 0.2s;
-        }
-        .dark-mode .download-btn { background-color: #374151; color: #60a5fa; }
-
-        .badge {
-            position: absolute; top: 12px; right: 12px;
-            background: #ef4444; color: white; 
-            font-size: 9px; font-weight: 800;
-            padding: 3px 6px; border-radius: 4px;
-        }
-        .badge.blue { background: #3b82f6; }
-
-        .app-card:hover, .app-card:focus {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary); outline: none; z-index: 10;
-        }
-        .app-card:hover .download-btn, .app-card:focus .download-btn {
-            background-color: var(--primary); color: white;
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
-        }
-
-        /* --- 4. TOAST NOTIFICATION (THÔNG BÁO) --- */
-        #toast {
-            visibility: hidden; min-width: 250px;
-            background-color: #1f2937; color: #fff;
-            text-align: center; border-radius: 50px;
-            padding: 16px; position: fixed; z-index: 9999;
-            left: 50%; bottom: 80px; transform: translateX(-50%);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            font-size: 14px; font-weight: 600;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            opacity: 0; transition: opacity 0.3s, bottom 0.3s;
-        }
-        #toast.show {
-            visibility: visible; opacity: 1; bottom: 100px;
-        }
-        .dark-mode #toast { background-color: #f3f4f6; color: #1f2937; }
-
-        /* --- 5. FOOTER --- */
-        .footer {
-            text-align: center; padding: 30px 20px;
-            margin-top: 20px; border-top: 1px solid var(--border-color);
-            color: var(--text-sub); font-size: 13px;
-            background: var(--bg-body);
-        }
-        .footer b { color: var(--primary); }
-
-        @media (max-width: 600px) {
-            .container { grid-template-columns: 1fr; gap: 15px; padding: 15px; }
-            .app-card {
-                flex-direction: row; text-align: left; padding: 15px;
-                align-items: center; border-radius: 12px;
-            }
-            .app-card img { width: 50px; height: 50px; margin: 0 15px 0 0; }
-            .app-card div { flex: 1; }
-            .badge { top: 10px; right: 10px; }
-            .download-btn { display: inline-block; margin-top: 5px; padding: 6px 12px; }
-            .stats-bar { flex-direction: row; gap: 10px; }
-        }
-
-        /* Màn hình khóa */
-        #loginOverlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); 
-            z-index: 9999; display: flex; justify-content: center; align-items: center;
-        }
-        .dark-mode #loginOverlay { background: rgba(17, 24, 39, 0.95); }
-        .login-box {
-            background: white; padding: 30px; border-radius: 20px;
-            text-align: center; width: 300px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1); border: 1px solid #f3f4f6;
-        }
-        .dark-mode .login-box { background: #1f2937; border-color: #374151; }
-        .login-input {
-            width: 100%; padding: 12px; margin: 15px 0;
-            background: #f9fafb; border: 1px solid #e5e7eb;
-            border-radius: 10px; font-size: 16px; outline: none;
-            box-sizing: border-box; text-align: center; color: #333;
-        }
-        .login-input:focus { border-color: var(--primary); background: white; }
-        .login-btn {
-            width: 100%; padding: 12px; background: var(--primary);
-            color: white; font-weight: 700; border: none;
-            border-radius: 10px; cursor: pointer; font-size: 14px;
-        }
-    </style>
-</head>
-<body>
-
-    <div id="toast">✅ Đang bắt đầu tải xuống...</div>
-
-    <div id="loginOverlay">
-        <div class="login-box" id="loginBox">
-            <h2 style="color: var(--text-main); margin: 0 0 10px;">🔐 BÌNH PRO</h2>
-            <p style="color: var(--text-sub); font-size: 13px; margin: 0;">Nhập mật khẩu để vào kho tải</p>
-            <input type="password" id="passInput" class="login-input" placeholder="Mật khẩu...">
-            <button onclick="checkPass()" class="login-btn">MỞ KHÓA</button>
-            <p id="errorMsg" style="color: #ef4444; display: none; margin-top: 10px; font-size: 13px;">❌ Sai mật khẩu!</p>
-        </div>
-    </div>
-
-    <div class="header">
-        <div class="header-top">
-            <h1>KHO TẢI BÌNH PRO</h1>
-            <button class="theme-toggle" onclick="toggleTheme()" title="Chế độ tối/sáng">🌗</button>
-        </div>
-
-        <div class="sub-title">Cập nhật phần mềm Android Box & Tivi mới nhất</div>
-        
-        <div class="stats-bar">
-            <div class="stat-item">
-                <span class="stat-dot"></span>
-                Đang truy cập: <span id="onlineCount" class="stat-number">...</span>
-            </div>
-            <div class="stat-item">
-                ⬇️ Lượt tải: <span id="downloadCount" class="stat-number">15,402</span>
-            </div>
-        </div>
-
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-box" onkeyup="filterApps()" placeholder="🔍 Tìm kiếm ứng dụng...">
-            
-            <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterCategory('all', this)">Tất cả</button>
-                <button class="filter-btn" onclick="filterCategory('movie', this)">🎬 Phim Ảnh</button>
-                <button class="filter-btn" onclick="filterCategory('kodi', this)">📦 Kodi/Repo</button>
-                <button class="filter-btn" onclick="filterCategory('tool', this)">🛠️ Công Cụ</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="container" id="appGrid">
-
-        <a href="PhimPlus.apk" class="app-card" data-category="movie" tabindex="0" onclick="startDownload(this)">
-            <span class="badge">HOT 🔥</span>
-            <img src="https://cdn-icons-png.flaticon.com/512/4208/4208453.png" alt="Icon">
-            <div>
-                <h3>Phim Plus</h3>
-                <p>Kho Phim Fshare Khổng Lồ</p>
-                <span class="download-btn">Tải Xuống</span>
-            </div>
-        </a>
-
-        <a href="PhimNhanh.apk" class="app-card" data-category="movie" tabindex="0" onclick="startDownload(this)">
-            <span class="badge blue">MỚI</span>
-            <img src="https://cdn-icons-png.flaticon.com/512/3074/3074767.png" alt="Icon">
-            <div>
-                <h3>Phim Nhanh</h3>
-                <p>Kho Phim Free Siêu Tốc</p>
-                <span class="download-btn">Tải Xuống</span>
-            </div>
-        </a>
-
-        <a href="Phim4K-v2.1.6.apk" class="app-card" data-category="movie" tabindex="0" onclick="startDownload(this)">
-            <img src="https://cdn-icons-png.flaticon.com/512/3163/3163508.png" alt="Icon">
-            <div>
-                <h3>Phim4K VIP</h3>
-                <p>v2.1.6 - Server VIP 4K</p>
-                <span class="download-btn">Tải Xuống</span>
-            </div>
-        </a>
-
-        <a href="kodi21.2-32bit.apk" class="app-card" data-category="kodi" tabindex="0" onclick="startDownload(this)">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Kodi_logo.svg/1200px-Kodi_logo.svg.png" alt="Icon">
-            <div>
-                <h3>Kodi 32bit</h3>
-                <p>Bản ổn định cho Box cũ</p>
-                <span class="download-btn">Tải Xuống</span>
-            </div>
-        </a>
-
-        <a href="file zip repo.zip" class="app-card" data-category="kodi" tabindex="0" onclick="startDownload(this)">
-            <span class="badge">ZIP</span>
-            <img src="https://cdn-icons-png.flaticon.com/512/9063/9063038.png" alt="Icon">
-            <div>
-                <h3>Repo Tổng Hợp</h3>
-                <p>Full Addon cài sẵn</p>
-                <span class="download-btn">Tải Xuống</span>
-            </div>
-        </a>
-
-         <a href="cat dat py.bat" class="app-card" data-category="tool" tabindex="0" onclick="startDownload(this)">
-            <img src="https://cdn-icons-png.flaticon.com/512/2620/2620735.png" alt="Icon">
-            <div>
-                <h3>Tool Cài Nhanh</h3>
-                <p>Script cài tự động PC</p>
-                <span class="download-btn">Tải Xuống</span>
-            </div>
-        </a>
-
-    </div>
-
-    <div class="footer">
-        <p>Copyright © 2025 by <b>Bình Pro</b>. All rights reserved.</p>
-    </div>
-
-    <script>
+<script>
         // ============================================================
-        // 🔴 CẤU HÌNH MẬT KHẨU Ở ĐÂY (QUAN TRỌNG)
-        // Bạn hãy sửa số "123456" bên dưới thành mật khẩu của bạn.
-        // Ví dụ: const MAT_KHAU_DUNG = "binhpro";
+        // 🔴 CẤU HÌNH QUẢN TRỊ VIÊN (SỬA Ở ĐÂY)
         // ============================================================
         
+        // 1. Mật khẩu để vào trang web
         const MAT_KHAU_DUNG = "123456"; 
 
+        // 2. Phiên bản khóa (QUAN TRỌNG)
+        // Khi bạn đổi mật khẩu, hãy đổi luôn chữ này (ví dụ: "v1" -> "v2")
+        // Làm vậy thì TẤT CẢ người dùng cũ sẽ bị đăng xuất và bắt nhập lại pass mới.
+        const PHIEN_BAN_KHOA = "v1"; 
+
         // ============================================================
 
-        if(localStorage.getItem("vipUser") === "true"){
-            document.getElementById("loginOverlay").style.display = "none";
+        // --- KIỂM TRA PHIÊN BẢN & TRẠNG THÁI ĐĂNG NHẬP ---
+        function checkLoginStatus() {
+            const userVersion = localStorage.getItem("khoaVersion");
+            const isVip = localStorage.getItem("vipUser");
+
+            // Nếu phiên bản cũ không khớp với phiên bản mới -> XÓA ĐĂNG NHẬP CŨ
+            if (userVersion !== PHIEN_BAN_KHOA) {
+                localStorage.removeItem("vipUser");
+                localStorage.removeItem("khoaVersion");
+                return false; // Chưa đăng nhập (do vừa bị reset)
+            }
+
+            // Nếu đúng phiên bản và đã đăng nhập
+            if (isVip === "true") {
+                return true;
+            }
+            
+            return false;
         }
 
+        // Ẩn/Hiện màn hình khóa dựa trên trạng thái
+        if (checkLoginStatus() === true) {
+            document.getElementById("loginOverlay").style.display = "none";
+        } else {
+            document.getElementById("loginOverlay").style.display = "flex";
+        }
+
+        // --- HÀM XỬ LÝ KHI BẤM NÚT MỞ KHÓA ---
         function checkPass() {
             var input = document.getElementById("passInput").value;
             var box = document.getElementById("loginBox");
             var msg = document.getElementById("errorMsg");
             
-            // So sánh mật khẩu nhập vào với mật khẩu đúng
             if(input === MAT_KHAU_DUNG) {
+                // Đăng nhập thành công
                 document.getElementById("loginOverlay").style.display = "none";
+                
+                // Lưu trạng thái VÀ lưu phiên bản hiện tại
                 localStorage.setItem("vipUser", "true"); 
+                localStorage.setItem("khoaVersion", PHIEN_BAN_KHOA); 
             } else {
                 msg.style.display = "block";
+                // Hiệu ứng rung lắc
                 box.style.transform = "translateX(10px)";
                 setTimeout(() => box.style.transform = "translateX(-10px)", 100);
                 setTimeout(() => box.style.transform = "translateX(0)", 200);
             }
         }
+        
         document.getElementById("passInput").addEventListener("keypress", function(e){
             if(e.key === "Enter") checkPass();
         });
 
-        // === 2. DARK MODE (CHẾ ĐỘ TỐI) ===
+        // === CÁC TÍNH NĂNG KHÁC (Dark Mode, Lọc, Toast...) GIỮ NGUYÊN ===
+
         function toggleTheme() {
             document.body.classList.toggle("dark-mode");
             if(document.body.classList.contains("dark-mode")) {
@@ -421,7 +80,6 @@
             document.body.classList.add("dark-mode");
         }
 
-        // === 3. BỘ LỌC TÌM KIẾM (FILTER) ===
         function filterApps() {
             var input = document.getElementById('searchInput');
             var filter = input.value.toUpperCase();
@@ -462,7 +120,7 @@
              btns[0].classList.add("active"); 
         }
 
-        // === 4. GIẢ LẬP SỐ LIỆU & TOAST NOTIFICATION ===
+        // Giả lập số liệu
         let baseDownloads = 15402; 
         let localClicks = parseInt(localStorage.getItem("myClicks")) || 0;
         
@@ -493,5 +151,3 @@
         setInterval(updateOnlineUsers, 4000);
 
     </script>
-</body>
-</html>
