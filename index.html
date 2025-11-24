@@ -21,7 +21,6 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            /* Chống chọn văn bản khi bấm nhầm trên TV */
             user-select: none; 
         }
 
@@ -39,7 +38,7 @@
 
         .header h1 {
             margin: 0;
-            font-size: clamp(20px, 5vw, 40px); /* Tự chỉnh cỡ chữ theo màn hình */
+            font-size: clamp(20px, 5vw, 40px);
             text-transform: uppercase;
             background: linear-gradient(to right, var(--primary), #fff, var(--primary));
             -webkit-background-clip: text;
@@ -50,157 +49,123 @@
         }
 
         .sub-title {
-            color: #aaa;
-            font-size: 0.9em;
-            margin-top: 5px;
+            color: #aaa; font-size: 0.9em; margin-top: 5px;
         }
 
         .search-container {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
+            margin-top: 15px; display: flex; justify-content: center;
         }
 
         .search-box {
-            width: 100%;
-            max-width: 600px;
-            padding: 12px 20px;
-            border-radius: 50px;
-            border: 2px solid rgba(255,255,255,0.2);
-            background: rgba(0,0,0,0.5);
-            color: white;
-            font-size: 18px;
-            outline: none;
-            transition: all 0.3s;
+            width: 100%; max-width: 600px; padding: 12px 20px;
+            border-radius: 50px; border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.5); color: white; font-size: 18px;
+            outline: none; transition: all 0.3s;
         }
 
-        /* Khi bấm vào ô tìm kiếm */
         .search-box:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 15px var(--primary);
+            border-color: var(--primary); box-shadow: 0 0 15px var(--primary);
             background: black;
         }
 
         /* --- LƯỚI ỨNG DỤNG --- */
         .container {
             display: grid;
-            /* Tự động chia cột: Điện thoại 1 cột, Tablet 2 cột, PC/TV 3-4 cột */
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-            padding: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
+            gap: 25px; padding: 20px; max-width: 1400px; margin: 0 auto;
         }
 
-        /* --- THẺ CARD (QUAN TRỌNG CHO TV) --- */
+        /* --- THẺ CARD --- */
         .app-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
+            background: var(--card-bg); border-radius: 16px; padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
+            text-align: center; border: 1px solid rgba(255,255,255,0.1);
             transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-            cursor: pointer;
-            position: relative;
-            text-decoration: none; /* Bỏ gạch chân link */
-            color: white;
+            cursor: pointer; position: relative; text-decoration: none; color: white;
         }
 
         .app-card img {
-            width: 90px;
-            height: 90px;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
-            margin-bottom: 15px;
+            width: 90px; height: 90px; object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); margin-bottom: 15px;
         }
 
-        .app-card h3 {
-            margin: 5px 0;
-            font-size: 1.3em;
-            color: var(--primary);
-        }
-
-        .app-card p {
-            font-size: 0.9em;
-            color: #ccc;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
+        .app-card h3 { margin: 5px 0; font-size: 1.3em; color: var(--primary); }
+        .app-card p { font-size: 0.9em; color: #ccc; margin-bottom: 15px; line-height: 1.4; }
 
         .download-btn {
             background: linear-gradient(90deg, #0052D4, #4364F7, #6FB1FC);
-            color: white;
-            padding: 10px 0;
-            width: 100%;
-            border-radius: 8px;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 14px;
+            color: white; padding: 10px 0; width: 100%; border-radius: 8px;
+            font-weight: bold; text-transform: uppercase; font-size: 14px;
         }
 
-        /* --- HIỆU ỨNG FOCUS (DÀNH CHO REMOTE TV) --- */
-        /* Khi dùng remote di chuyển vào thẻ này */
         .app-card:hover, .app-card:focus {
-            transform: scale(1.05);
-            background: rgba(50, 50, 50, 0.95);
-            border-color: var(--primary);
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-            outline: none; /* Bỏ viền xanh mặc định của trình duyệt */
-            z-index: 10;
+            transform: scale(1.05); background: rgba(50, 50, 50, 0.95);
+            border-color: var(--primary); box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+            outline: none; z-index: 10;
         }
         
-        /* Khi Focus vào, nút tải đổi màu để người dùng dễ thấy */
         .app-card:focus .download-btn, .app-card:hover .download-btn {
-            background: var(--primary);
-            color: black;
-            box-shadow: 0 0 10px var(--primary);
+            background: var(--primary); color: black; box-shadow: 0 0 10px var(--primary);
         }
 
-        /* --- PHIÊN BẢN CHO ĐIỆN THOẠI NHỎ --- */
         @media (max-width: 600px) {
-            .container {
-                grid-template-columns: 1fr; /* 1 cột duy nhất */
-                gap: 15px;
-                padding: 10px;
-            }
-            .app-card {
-                flex-direction: row; /* Xếp ngang icon và chữ */
-                padding: 15px;
-                text-align: left;
-                align-items: center;
-            }
-            .app-card img {
-                width: 60px;
-                height: 60px;
-                margin-bottom: 0;
-                margin-right: 15px;
-            }
-            .app-card div {
-                flex: 1;
-            }
-            .app-card h3 {
-                font-size: 1.1em;
-                margin-top: 0;
-            }
-            .download-btn {
-                width: auto;
-                padding: 8px 15px;
-                margin-top: 5px;
-                display: inline-block;
-            }
+            .container { grid-template-columns: 1fr; gap: 15px; padding: 10px; }
+            .app-card { flex-direction: row; padding: 15px; text-align: left; align-items: center; }
+            .app-card img { width: 60px; height: 60px; margin-bottom: 0; margin-right: 15px; }
+            .app-card div { flex: 1; }
+            .app-card h3 { font-size: 1.1em; margin-top: 0; }
+            .download-btn { width: auto; padding: 8px 15px; margin-top: 5px; display: inline-block; }
+        }
+
+        /* --- CSS CHO MÀN HÌNH KHÓA --- */
+        #loginOverlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            backdrop-filter: blur(10px);
+        }
+        .login-box {
+            background: #1a1a1a; padding: 40px; border-radius: 20px;
+            text-align: center; border: 2px solid var(--primary);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
+            width: 300px;
+        }
+        .login-input {
+            width: 100%; padding: 12px; margin: 15px 0;
+            background: #333; border: 1px solid #555; color: white;
+            border-radius: 5px; font-size: 16px; outline: none;
+            box-sizing: border-box; text-align: center;
+        }
+        .login-btn {
+            width: 100%; padding: 12px; background: var(--primary);
+            color: black; font-weight: 900; border: none;
+            border-radius: 5px; cursor: pointer; font-size: 16px;
+        }
+        .shake { animation: shake 0.3s; }
+        @keyframes shake {
+            0% { transform: translateX(0); } 25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); } 75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
         }
     </style>
 </head>
 <body>
 
+    <div id="loginOverlay">
+        <div class="login-box" id="loginBox">
+            <h2 style="color: var(--primary); margin-top: 0;">🔒 KHO VIP</h2>
+            <p style="color: #bbb;">Nhập mật khẩu để truy cập</p>
+            <input type="password" id="passInput" class="login-input" placeholder="Mật khẩu...">
+            <button onclick="checkPass()" class="login-btn">MỞ KHÓA</button>
+            <p id="errorMsg" style="color: #ff4444; display: none; margin-top: 10px;">❌ Sai mật khẩu!</p>
+        </div>
+    </div>
+
     <div class="header">
         <h1>KHO TẢI APK VIP BÌNH PRO</h1>
         <div class="sub-title">Cập nhật phần mềm Android Box & Tivi mới nhất</div>
         <div class="search-container">
-            <input type="text" id="searchInput" class="search-box" onkeyup="filterApps()" placeholder="🔍 Tìm kiếm ứng dụng (Nhập tên)...">
+            <input type="text" id="searchInput" class="search-box" onkeyup="filterApps()" placeholder="🔍 Tìm kiếm ứng dụng...">
         </div>
     </div>
 
@@ -251,9 +216,38 @@
             </div>
         </a>
 
-        </div>
+    </div>
 
     <script>
+        // --- CẤU HÌNH MẬT KHẨU ---
+        // Sửa số 123456 bên dưới thành mật khẩu bạn muốn
+        const MAT_KHAU_DUNG = "787878"; 
+
+        // Kiểm tra xem đã đăng nhập chưa
+        if(localStorage.getItem("vipUser") === "true"){
+            document.getElementById("loginOverlay").style.display = "none";
+        }
+
+        function checkPass() {
+            var input = document.getElementById("passInput").value;
+            var box = document.getElementById("loginBox");
+            
+            if(input === MAT_KHAU_DUNG) {
+                document.getElementById("loginOverlay").style.display = "none";
+                localStorage.setItem("vipUser", "true"); // Lưu lại đăng nhập
+            } else {
+                document.getElementById("errorMsg").style.display = "block";
+                box.classList.add("shake");
+                setTimeout(() => box.classList.remove("shake"), 300);
+            }
+        }
+        
+        // Bấm Enter cũng đăng nhập được
+        document.getElementById("passInput").addEventListener("keypress", function(e){
+            if(e.key === "Enter") checkPass();
+        });
+
+        // Hàm lọc tìm kiếm
         function filterApps() {
             var input, filter, grid, cards, h3, i, txtValue;
             input = document.getElementById('searchInput');
@@ -265,12 +259,4 @@
                 h3 = cards[i].getElementsByTagName("h3")[0];
                 txtValue = h3.textContent || h3.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    cards[i].style.display = "flex"; // Giữ layout flex
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
-        }
-    </script>
-</body>
-</html>
+                    cards[i].style.display = "flex
