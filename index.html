@@ -25,7 +25,6 @@
             margin: 0; padding: 0;
             min-height: 100vh;
             user-select: none;
-            display: flex; flex-direction: column; /* Để đẩy footer xuống đáy nếu nội dung ít */
         }
 
         /* --- 2. HEADER NHỎ GỌN CHO TIVI --- */
@@ -53,7 +52,7 @@
             margin-top: 2px; color: var(--text-sub); font-size: 13px;
         }
 
-        /* --- PHẦN THỐNG KÊ --- */
+        /* --- PHẦN THỐNG KÊ MỚI --- */
         .stats-bar {
             display: flex;
             justify-content: center;
@@ -109,7 +108,6 @@
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 20px; padding: 20px; 
             max-width: 1400px; margin: 0 auto;
-            flex: 1; /* Đẩy footer xuống dưới cùng */
         }
 
         /* --- 4. THẺ CARD --- */
@@ -173,18 +171,6 @@
             color: white;
             box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
-
-        /* --- 5. FOOTER (MỚI THÊM) --- */
-        .footer {
-            text-align: center;
-            padding: 25px;
-            margin-top: 20px;
-            border-top: 1px solid #e5e7eb;
-            color: var(--text-sub);
-            font-size: 13px;
-            background: #fafafa;
-        }
-        .footer b { color: var(--primary); }
 
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 600px) {
@@ -317,12 +303,8 @@
 
     </div>
 
-    <div class="footer">
-        <p>Copyright © 2025 by <b>Bình Pro</b>. All rights reserved.</p>
-    </div>
-
     <script>
-        // === CẤU HÌNH MẬT KHẨU ===
+        // === 1. CẤU HÌNH MẬT KHẨU Ở ĐÂY ===
         const MAT_KHAU_DUNG = "123456"; 
 
         // Kiểm tra đăng nhập
@@ -346,6 +328,7 @@
             }
         }
         
+        // Enter để đăng nhập
         document.getElementById("passInput").addEventListener("keypress", function(e){
             if(e.key === "Enter") checkPass();
         });
@@ -369,28 +352,39 @@
             }
         }
 
-        // === GIẢ LẬP SỐ LIỆU ===
-        let baseDownloads = 15402;
+        // === TÍNH NĂNG MỚI: GIẢ LẬP SỐ LIỆU ===
+        
+        // 1. Giả lập lượt tải (Lấy số gốc + số click lưu trong máy)
+        let baseDownloads = 15402; // Số lượt tải nền (bạn có thể sửa số này cho to lên)
+        
+        // Lấy số lượt click đã lưu trong trình duyệt (nếu có)
         let localClicks = parseInt(localStorage.getItem("myClicks")) || 0;
         
         function updateDownloadDisplay() {
+            // Định dạng số có dấu phẩy: 15,402
             let total = baseDownloads + localClicks;
             document.getElementById("downloadCount").innerText = total.toLocaleString('en-US');
         }
 
+        // Hàm được gọi khi bấm vào thẻ App
         function countDownload() {
             localClicks++;
             localStorage.setItem("myClicks", localClicks);
             updateDownloadDisplay();
         }
 
+        // 2. Giả lập người Online (Random nhảy số)
         function updateOnlineUsers() {
+            // Random từ 25 đến 60 người
             let users = Math.floor(Math.random() * (60 - 25 + 1)) + 25; 
             document.getElementById("onlineCount").innerText = users;
         }
 
+        // Chạy lần đầu
         updateDownloadDisplay();
         updateOnlineUsers();
+
+        // Cứ 4 giây cập nhật số người online một lần cho sinh động
         setInterval(updateOnlineUsers, 4000);
 
     </script>
