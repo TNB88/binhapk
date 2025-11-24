@@ -10,11 +10,11 @@
         :root {
             --bg-body: #f3f4f6;       /* Xám rất nhạt */
             --bg-card: #ffffff;       /* Trắng tinh */
-            --primary: #2563eb;       /* Xanh Royal Blue chuyên nghiệp */
+            --primary: #2563eb;       /* Xanh Royal Blue */
             --primary-dark: #1e40af;  /* Xanh đậm hơn khi hover */
-            --text-main: #1f2937;     /* Xám đen (Dễ đọc hơn đen tuyền) */
-            --text-sub: #6b7280;      /* Xám nhạt cho mô tả */
-            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08); /* Bóng mờ xịn */
+            --text-main: #1f2937;     /* Xám đen */
+            --text-sub: #6b7280;      /* Xám nhạt */
+            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
             --shadow-hover: 0 20px 50px -10px rgba(37, 99, 235, 0.2);
         }
 
@@ -41,33 +41,26 @@
             margin: 0;
             font-size: clamp(22px, 5vw, 36px);
             font-weight: 800;
-            background: linear-gradient(to right, #2563eb, #9333ea); /* Chữ màu Gradient Xanh Tím */
+            background: linear-gradient(to right, #2563eb, #9333ea);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
         }
 
-        .sub-title {
-            margin-top: 8px; color: var(--text-sub); font-size: 15px;
-        }
+        .sub-title { margin-top: 8px; color: var(--text-sub); font-size: 15px; }
 
-        .search-container {
-            margin-top: 25px; display: flex; justify-content: center;
-        }
+        .search-container { margin-top: 25px; display: flex; justify-content: center; }
 
         .search-box {
             width: 100%; max-width: 500px; padding: 16px 25px;
             border-radius: 100px; border: 2px solid transparent;
-            background: white;
-            color: var(--text-main); font-size: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Bóng nhẹ */
-            transition: all 0.3s ease;
-            outline: none;
+            background: white; color: var(--text-main); font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; outline: none;
         }
         
         .search-box:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); /* Hiệu ứng tỏa sáng khi bấm vào */
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
 
         /* --- 3. LƯỚI ỨNG DỤNG --- */
@@ -78,55 +71,42 @@
             max-width: 1200px; margin: 0 auto;
         }
 
-        /* --- 4. THẺ CARD CHUYÊN NGHIỆP --- */
+        /* --- 4. THẺ CARD --- */
         .app-card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 25px;
+            background: var(--bg-card); border-radius: 20px; padding: 25px;
             display: flex; flex-direction: column; align-items: center;
-            text-align: center;
-            text-decoration: none;
-            position: relative; /* Để gắn nhãn HOT */
-            box-shadow: var(--shadow-soft);
-            border: 1px solid rgba(0,0,0,0.03);
+            text-align: center; text-decoration: none; position: relative;
+            box-shadow: var(--shadow-soft); border: 1px solid rgba(0,0,0,0.03);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* --- PHẦN CHỈNH SỬA KÍCH THƯỚC ẢNH --- */
         .app-card img {
-            width: 80px; height: 80px; object-fit: contain;
-            margin-bottom: 15px;
+            width: 120px;  /* Đã tăng lên 120px */
+            height: 120px; /* Đã tăng lên 120px */
+            object-fit: contain;
+            margin-bottom: 20px;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
             transition: transform 0.3s;
         }
 
-        .app-card h3 {
-            margin: 5px 0; font-size: 18px; font-weight: 700; color: var(--text-main);
-        }
+        .app-card h3 { margin: 5px 0; font-size: 18px; font-weight: 700; color: var(--text-main); }
+        .app-card p { font-size: 14px; color: var(--text-sub); margin-bottom: 20px; line-height: 1.5; }
 
-        .app-card p {
-            font-size: 14px; color: var(--text-sub); margin-bottom: 20px; line-height: 1.5;
-        }
-
-        /* Nút Tải về (Style bo tròn hiện đại) */
         .download-btn {
             background-color: #f3f4f6; color: var(--primary);
             padding: 10px 24px; border-radius: 50px;
-            font-weight: 600; font-size: 13px;
-            transition: all 0.2s;
+            font-weight: 600; font-size: 13px; transition: all 0.2s;
         }
 
-        /* --- NHÃN DÁN (BADGE) - TÍNH NĂNG MỚI --- */
         .badge {
             position: absolute; top: 15px; right: 15px;
-            background: #ef4444; /* Màu đỏ */
-            color: white; font-size: 10px; font-weight: 800;
-            padding: 4px 8px; border-radius: 6px;
-            text-transform: uppercase;
+            background: #ef4444; color: white; font-size: 10px; font-weight: 800;
+            padding: 4px 8px; border-radius: 6px; text-transform: uppercase;
         }
-        .badge.blue { background: #3b82f6; } /* Nhãn xanh */
-        .badge.green { background: #10b981; } /* Nhãn xanh lá */
+        .badge.blue { background: #3b82f6; }
+        .badge.green { background: #10b981; }
 
-        /* --- HIỆU ỨNG HOVER & FOCUS (QUAN TRỌNG CHO TV) --- */
         .app-card:hover, .app-card:focus {
             transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
@@ -134,16 +114,12 @@
             outline: none;
         }
 
-        /* Khi chọn, nút bấm đổi màu */
         .app-card:hover .download-btn, .app-card:focus .download-btn {
-            background-color: var(--primary);
-            color: white;
+            background-color: var(--primary); color: white;
             box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
 
-        .app-card:hover img, .app-card:focus img {
-            transform: scale(1.1);
-        }
+        .app-card:hover img, .app-card:focus img { transform: scale(1.1); }
 
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 600px) {
@@ -152,38 +128,41 @@
                 flex-direction: row; text-align: left; padding: 15px;
                 align-items: center; border-radius: 16px;
             }
-            .app-card img { width: 60px; height: 60px; margin: 0 15px 0 0; }
+            
+            /* Ảnh trên điện thoại */
+            .app-card img { 
+                width: 85px;  /* Tăng lên 85px cho điện thoại */
+                height: 85px; 
+                margin: 0 15px 0 0; 
+            }
+            
             .app-card div { flex: 1; }
             .badge { top: 10px; right: 10px; font-size: 9px; }
             .download-btn { display: inline-block; margin-top: 5px; padding: 6px 15px; font-size: 12px;}
         }
 
-        /* --- CSS MÀN HÌNH KHÓA (LIGHT MODE) --- */
+        /* --- MÀN HÌNH KHÓA --- */
         #loginOverlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.8); /* Nền trắng mờ */
-            backdrop-filter: blur(15px); z-index: 9999;
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(15px); z-index: 9999;
             display: flex; justify-content: center; align-items: center;
         }
         .login-box {
             background: white; padding: 40px; border-radius: 24px;
             text-align: center; width: 320px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            border: 1px solid #f3f4f6;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1); border: 1px solid #f3f4f6;
         }
         .login-input {
             width: 100%; padding: 14px; margin: 20px 0;
             background: #f9fafb; border: 2px solid #e5e7eb;
             border-radius: 12px; font-size: 16px; outline: none;
-            box-sizing: border-box; text-align: center; color: #333;
-            transition: 0.3s;
+            box-sizing: border-box; text-align: center; color: #333; transition: 0.3s;
         }
         .login-input:focus { border-color: var(--primary); background: white; }
         .login-btn {
             width: 100%; padding: 14px; background: var(--primary);
             color: white; font-weight: 700; border: none;
-            border-radius: 12px; cursor: pointer; font-size: 16px;
-            transition: 0.3s;
+            border-radius: 12px; cursor: pointer; font-size: 16px; transition: 0.3s;
         }
         .login-btn:hover { background: var(--primary-dark); transform: scale(1.02); }
         .shake { animation: shake 0.3s; }
@@ -223,7 +202,7 @@
             <img src="Screenshot 0008.jpg" alt="Icon">
             <div>
                 <h3>Phim Plus</h3>
-                <p> Kho Phim Fshare Khổng Lồ</p>
+                <p>Kho Phim Fshare Khổng Lồ</p>
                 <span class="download-btn">Tải Xuống</span>
             </div>
         </a>
@@ -269,7 +248,6 @@
     </div>
 
     <script>
-        // --- CẤU HÌNH MẬT KHẨU ---
         const MAT_KHAU_DUNG = "123456"; 
 
         if(localStorage.getItem("vipUser") === "true"){
