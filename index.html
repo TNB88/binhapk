@@ -331,7 +331,7 @@
 
         <div class="marquee-container">
             <div class="marquee-text">
-                📢 THÔNG BÁO: Chào mừng anh em đến với Kho Tải Bình Pro! Anh Trung Xì Phố Đừng Xem Phim Sex Nhiều Nhé - Nhớ bookmark trang để cập nhật App mới nhất nhé! Chúc anh em xem phim vui vẻ!
+                📢 THÔNG BÁO: Chào mừng anh em đến với Kho Tải Bình Pro! Anh Trung Xì Phố Nhớ Đừng Xem Phim Sex Nhiều Nhé - Nhớ bookmark trang để cập nhật App mới nhất nhé! Chúc anh em xem phim vui vẻ!
             </div>
         </div>
         <div class="search-container">
@@ -544,3 +544,47 @@
                 if (category === 'all' || cat === category) {
                     cards[i].style.display = "flex";
                 } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+        
+        function resetButtons(){
+             var btns = document.getElementsByClassName("filter-btn");
+             for(var b of btns) b.classList.remove("active");
+             btns[0].classList.add("active"); 
+        }
+
+        // Giả lập số liệu
+        let baseDownloads = 1; 
+        let localClicks = parseInt(localStorage.getItem("myClicks")) || 0;
+        
+        function updateDownloadDisplay() {
+            let total = baseDownloads + localClicks;
+            document.getElementById("downloadCount").innerText = total.toLocaleString('en-US');
+        }
+
+        function startDownload(element) {
+            localClicks++;
+            localStorage.setItem("myClicks", localClicks);
+            updateDownloadDisplay();
+
+            var appName = element.getElementsByTagName("h3")[0].innerText;
+            var toast = document.getElementById("toast");
+            toast.innerText = "✅ Đang bắt đầu tải: " + appName;
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        function updateOnlineUsers() {
+            let users = Math.floor(Math.random() * (60 - 25 + 1)) + 25; 
+            document.getElementById("onlineCount").innerText = users;
+        }
+
+        updateDownloadDisplay();
+        updateOnlineUsers();
+        setInterval(updateOnlineUsers, 4000);
+
+    </script>
+</body>
+</html>
