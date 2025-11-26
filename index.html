@@ -25,35 +25,14 @@
             color: var(--text-main); margin: 0; padding: 0; min-height: 100vh;
             transition: background-color 0.3s, color 0.3s;
         }
-
-        /* --- CẤU HÌNH HEADER (Mặc định cho PC & Điện thoại: CỐ ĐỊNH) --- */
         .header {
             background: var(--header-bg); padding: 15px 20px; text-align: center;
             border-bottom: 1px solid var(--border-color); 
-            
-            position: fixed; /* Cố định trên cùng */
-            top: 0; left: 0; width: 100%; z-index: 100;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            box-sizing: border-box;
+            /* --- ĐÃ SỬA LẠI: TRẢ VỀ TRẠNG THÁI BÌNH THƯỜNG --- */
+            position: relative; 
+            z-index: 100;
+            /* -------------------------------------------------- */
         }
-        
-        .container {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px; padding: 20px; max-width: 1400px; margin: 0 auto;
-            
-            margin-top: 280px; /* Đẩy nội dung xuống để không bị header che (PC/ĐT) */
-        }
-
-        /* --- CẤU HÌNH RIÊNG CHO TIVI / ANDROID BOX (Sẽ được JS kích hoạt) --- */
-        body.is-tv .header {
-            position: relative; /* Tivi: Trôi theo khi cuộn */
-            box-shadow: none;
-        }
-        body.is-tv .container {
-            margin-top: 0; /* Tivi: Không cần đẩy nội dung xuống */
-        }
-        /* ---------------------------------------------------------------- */
-
         .header-top { position: relative; }
         .theme-toggle {
             position: absolute; top: 0; right: 0; background: rgba(0,0,0,0.05); border: none;
@@ -74,6 +53,7 @@
         @keyframes pulse { 0% {opacity:1;transform:scale(1);} 50% {opacity:0.5;transform:scale(1.2);} 100% {opacity:1;transform:scale(1);} }
         .stat-number { color: var(--primary); font-weight: 800; }
 
+        /* CHỮ CHẠY */
         .marquee-container {
             width: 100%; overflow: hidden; white-space: nowrap;
             background: rgba(255, 165, 0, 0.1); border-radius: 8px;
@@ -97,6 +77,12 @@
         }
         .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
 
+        .container {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px; padding: 20px; max-width: 1400px; margin: 0 auto;
+            /* --- ĐÃ XÓA MARGIN-TOP LỚN, TRỞ VỀ BÌNH THƯỜNG --- */
+            /* -------------------------------------------------- */
+        }
         .app-card {
             background: var(--bg-card); border-radius: 16px; padding: 20px;
             display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none;
@@ -120,10 +106,8 @@
         @media (max-width: 600px) {
             .container { 
                 grid-template-columns: 1fr; gap: 15px; padding: 15px; 
-                margin-top: 290px; /* Điều chỉnh cho Mobile (Header Fixed) */
+                /* Đã xóa margin-top mobile */
             }
-            body.is-tv .container { margin-top: 0; } /* Reset nếu là TV */
-
             .app-card { flex-direction: row; text-align: left; padding: 15px; align-items: center; }
             .app-card img { width: 50px; height: 50px; margin: 0 15px 0 0; }
             .app-card div { flex: 1; }
@@ -166,7 +150,7 @@
             <div class="stat-item">⬇️ Lượt tải: <span id="downloadCount" class="stat-number">0</span></div>
         </div>
         <div class="marquee-container">
-            <div class="marquee-text">📢 THÔNG BÁO: Tài khoản fshare chỉ với 200k/ năm, LH: Bình Pro Ngay Nhé!</div>
+            <div class="marquee-text">📢 THÔNG BÁO: Tài khoản fshare chỉ với 200k/ năm, LH: Bình Pro Ngay!</div>
         </div>
         <div class="search-container">
             <input type="text" id="searchInput" class="search-box" onkeyup="filterApps()" placeholder="🔍 Tìm kiếm ứng dụng...">
@@ -239,31 +223,12 @@
     <div class="footer"><p>Copyright © 2025 by <b>Bình Pro</b>. All rights reserved.</p></div>
 
     <script>
-        // --- TỰ ĐỘNG PHÁT HIỆN TIVI ---
-        // Logic: Nếu UserAgent chứa từ khóa TV HOẶC là Android nhưng màn hình lớn (ngang)
-        function detectTVMode() {
-            var ua = navigator.userAgent.toLowerCase();
-            var isTV = ua.includes('tv') || 
-                       ua.includes('box') || 
-                       ua.includes('android tv') ||
-                       (ua.includes('android') && window.innerWidth > 900); // Android Box thường hiện là Android nhưng màn hình to
-            
-            // Ngoại trừ trường hợp là PC (Windows/Mac)
-            if (ua.includes('windows') || ua.includes('macintosh')) isTV = false;
-
-            if (isTV) {
-                document.body.classList.add('is-tv');
-                console.log("Đã kích hoạt chế độ Tivi (Menu cuộn)");
-            }
-        }
-        detectTVMode();
-        // --------------------------------
-
         const MAT_KHAU_DUNG = "1984"; 
         const PHIEN_BAN_KHOA = "v1"; 
 
         function checkPass() {
             var input = document.getElementById("passInput").value;
+            // Xóa khoảng trắng để sửa lỗi trên điện thoại
             if(input.trim() === MAT_KHAU_DUNG) {
                 document.getElementById("loginOverlay").style.display = "none";
                 localStorage.setItem("vipUser", "true"); 
